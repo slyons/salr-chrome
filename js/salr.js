@@ -122,6 +122,8 @@ port.onMessage.addListener(function(data) {
             if (settings.qneProtection == 'true') {
                 quoteNotEditProtection();
             }
+            
+            emoticonAutocompleter();
 
             break;
         case 'usercp.php':
@@ -918,4 +920,13 @@ function quoteNotEditProtection() {
         }
     }
     
+}
+
+function emoticonAutocompleter()
+{
+    jQuery("textarea[name='message']").autocomplete(SALR_emoticon_data, 
+    {  multiple:true, multipleSeparator: " ",
+       formatItem: function(row){ return row.emoticon + " <img src='" + row.image + "'>"; },
+       formatMatch: function(row) { return row.emoticon;} 
+    });
 }
